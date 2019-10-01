@@ -1,15 +1,13 @@
 # v1.16 离线安装
 >### 确保所有节点系统时间一致
-
-## 1、下载二进制包
-
+## 1、下载二进制包，并解压到工作目录
 ```
 cd ansible-install-k8s
 tar zxf binary_pkg.tar.gz
 ```
-## 1、修改hosts文件
+## 2、修改hosts文件
 根据规划修改对应IP和名称。
-## 2、修改group_vars/all.yml文件
+## 3、修改group_vars/all.yml文件
 
 添加证书可信任IP：
 ```
@@ -17,7 +15,7 @@ cert_hosts:
   k8s:
   etcd:
 ```
-## 3、一键部署
+## 4、一键部署
 ### 架构图
 单Master架构
 ![avatar](https://github.com/lizhenliang/ansible-install-k8s/blob/master/single-master.png)
