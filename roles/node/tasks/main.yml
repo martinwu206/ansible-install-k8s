@@ -8,7 +8,10 @@
     - logs
 
 - name: 创建cni插件目录
-  file: dest=/opt/cni/bin state=directory
+  file: dest={{ item }} state=directory
+  with_items:
+    - /opt/cni/bin
+    - /etc/cni/net.d
 
 - name: 创建临时目录
   file: dest={{ tmp_dir }} state=directory
@@ -17,7 +20,6 @@
   unarchive: src={{ item }} dest={{ tmp_dir }}
   with_fileglob:
     - "{{ inventory_dir }}/binary_pkg/kubernetes-*.tar.gz"
-    - "{{ inventory_dir }}/binary_pkg/cni-plugins-*.tgz"
 
 - name: 分发并解压cni插件二进制包
   unarchive: src={{ item }} dest=/opt/cni/bin

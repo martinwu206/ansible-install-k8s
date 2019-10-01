@@ -5,10 +5,8 @@
 
 - name: 拷贝YAML文件到Master
   copy: src={{ item }} dest={{ tmp_dir }}
-  with_items:
-    - kubernetes-dashboard.yaml
-    - coredns.yaml
-    - ingress-controller.yaml
+  with_fileglob:
+    - "*.yaml"
 
 - name: 部署Dashboard,CoreDNS,Ingress
   ignore_errors: yes
