@@ -20,7 +20,6 @@
     - docker 
   tags: docker
 
-
 - name: 3.部署ETCD集群
   gather_facts: false
   hosts: etcd
