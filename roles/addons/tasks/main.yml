@@ -16,9 +16,7 @@
   shell: kubectl create secret generic kubernetes-dashboard-certs \
          --from-file={{ k8s_work_dir }}/ssl/server-key.pem --from-file={{ k8s_work_dir }}/ssl/server.pem -n kube-system && \
          cd {{ tmp_dir }} && \
-         kubectl apply -f kubernetes-dashboard.yaml && \
-         kubectl apply -f coredns.yaml && \
-         kubectl apply -f ingress-controller.yaml
+         for yaml in $(ls *.yaml);do kubectl apply -f $yaml;done
 
 - name: 查看Pod状态
   shell: kubectl get all --all-namespaces

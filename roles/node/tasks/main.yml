@@ -7,6 +7,9 @@
     - ssl
     - logs
 
+- name: 创建cni插件目录
+  file: dest=/opt/cni/bin state=directory
+
 - name: 创建临时目录
   file: dest={{ tmp_dir }} state=directory
 
@@ -14,6 +17,12 @@
   unarchive: src={{ item }} dest={{ tmp_dir }}
   with_fileglob:
     - "{{ inventory_dir }}/binary_pkg/kubernetes-*.tar.gz"
+    - "{{ inventory_dir }}/binary_pkg/cni-plugins-*.tgz"
+
+- name: 分发并解压cni插件二进制包
+  unarchive: src={{ item }} dest=/opt/cni/bin
+  with_fileglob:
+    - "{{ inventory_dir }}/binary_pkg/cni-plugins-*.tgz"
 
 - name: 移动k8s node二进制文件
   shell: cp -rf {{ tmp_dir }}/kubernetes/server/bin/{kubelet,kube-proxy} {{ k8s_work_dir }}/bin

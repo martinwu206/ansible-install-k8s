@@ -42,6 +42,3 @@
   shell: /bin/bash {{ tmp_dir }}/etcd.sh cluster-health
   register: status 
 - debug: var=status.stdout_lines
-
-- name: 向etcd写入flannel子网
-  shell: /bin/bash {{ tmp_dir }}/etcd.sh write-subnet

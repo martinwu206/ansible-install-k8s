@@ -1,9 +1,0 @@
-- hosts: 
-   - k8s
-   - etcd
-
-  tasks:
-    - shell: for s in docker kube-apiserver kube-controller-manager kube-scheduler kubelet kube-proxy flanneld;do systemctl stop $s;done && \
-             rm -rf /opt/etcd /opt/kubernetes && \
-             rm -rf /usr/lib/systemd/system/{docker,kube-apiserver,kube-controller-manager,kube-scheduler,kubelet,kube-proxy,flanneld}.service && \
-             rm -rf /var/lib/etcd /tmp/k8s
