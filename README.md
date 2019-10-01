@@ -1,6 +1,7 @@
 # Kubernetes v1.16 高可用集群自动部署（离线版）
 >### 确保所有节点系统时间一致
 ## 1、下载二进制包，并解压到工作目录
+云盘地址：https://pan.baidu.com/s/1aJk___IqONbaQopxwD52Og
 ```
 cd ansible-install-k8s
 tar zxf binary_pkg.tar.gz
