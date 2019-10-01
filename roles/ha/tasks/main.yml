@@ -1,0 +1,34 @@
+---
+- name: 创建临时目录
+  file: dest={{ tmp_dir }} state=directory
+
+- name: 拷贝安装包
+  copy: src={{ item }} dest={{ tmp_dir }}
+  with_fileglob:
+     - '*.rpm'
+
+- name: 安装nginx,keepalived  
+  ignore_errors: yes
+  shell: cd {{ tmp_dir }} && \
+         rpm -Uvh nginx*rpm && \
+         rpm -Uvh net-snmp*rpm && \
+         rpm -Uvh keepalived*rpm
+
+- name: 拷贝nginx配置文件
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
+  notify:
+    - reload nginx
+
+- name: 拷贝keepalived配置文件       
+  template: src=keepalived.conf.j2 dest=/etc/keepalived/keepalived.conf
+  notify:
+    - restart keepalived
+
+- name: 拷贝nginx健康检查脚本
+  copy: src=check_nginx.sh dest=/etc/keepalived/ mode=u+x
+
+- name: 启动服务
+  service: name={{ item }} state=started enabled=yes
+  with_items:
+    - nginx
+    - keepalived

@@ -1,0 +1,27 @@
+# v1.16 离线安装
+>### 确保所有节点系统时间一致
+## 1、修改hosts文件
+根据规划修改对应IP和名称。
+## 2、修改group_vars/all.yml文件
+
+添加证书可信任IP：
+```
+cert_hosts:
+  k8s:
+  etcd:
+```
+## 3、一键部署
+### 架构图
+单Master架构
+![avatar](https://github.com/lizhenliang/ansible-install-k8s/blob/master/single-master.png)
+多Master架构
+![avatar](https://github.com/lizhenliang/ansible-install-k8s/blob/master/multi-master.png)
+### 部署命令
+单Master版：
+```
+ansible-playbook -i hosts single-master-deploy.yml -uroot -k
+```
+多Master版：
+```
+ansible-playbook -i hosts multi-master-deploy.yml -uroot -k
+```
