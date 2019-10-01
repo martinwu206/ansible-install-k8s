@@ -1,5 +1,12 @@
 # v1.16 离线安装
 >### 确保所有节点系统时间一致
+
+## 1、下载二进制包
+
+```
+cd ansible-install-k8s
+tar zxf binary_pkg.tar.gz
+```
 ## 1、修改hosts文件
 根据规划修改对应IP和名称。
 ## 2、修改group_vars/all.yml文件
