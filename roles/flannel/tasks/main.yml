@@ -44,6 +44,9 @@
 - name: 启动flannel
   service: name=flanneld state=restarted enabled=yes
 
+- name: 启动docker
+  service: name=docker state=restarted enabled=yes
+
 - name: 查看网卡信息
   shell: ip addr |egrep "docker0|flannel"
   register: nic
