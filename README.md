@@ -8,6 +8,7 @@ tar zxf binary_pkg_cni.tar.gz
 ```
 ## 2、修改hosts文件
 根据规划修改对应IP和名称。
+vi hosts
 ## 3、修改group_vars/all.yml文件
 
 添加证书可信任IP：
